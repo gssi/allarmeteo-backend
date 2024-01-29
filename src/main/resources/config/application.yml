@@ -1,0 +1,15 @@
+server:
+  servlet:
+     context-path: /allarmeteo
+    
+    
+spring:
+  application:
+    name: AllarMeteo
+  profiles:
+    active: dev
+
+######################################################
+############## Allarmeteo PROPERTIES #################
+######################################################
+
