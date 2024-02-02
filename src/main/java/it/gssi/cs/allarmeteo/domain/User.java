@@ -6,6 +6,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("user")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,10 @@ public class User {
   @Temporal(TemporalType.DATE)
   @Column(name = "joined_date", nullable = false)
   private Date joinedDate;
+
+  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+  @JoinColumn(name = "address_id", nullable = false)
+  private Address address;
 
   public Long getId() {
     return id;
@@ -64,4 +70,13 @@ public class User {
   public void setJoinedDate(Date joinedDate) {
     this.joinedDate = joinedDate;
   }
+
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
 }
