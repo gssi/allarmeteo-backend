@@ -1,40 +1,34 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
-@Entity
-@Table(name = "addresses")
+@Embeddable
 public class Address {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private Long id;
 
   @Column(name = "street", nullable = false)
   private String street;
 
-  @Column(name = "postal_code", nullable = false, length = 20)
-  private String postal_code;
+  @Column(name = "street_number", nullable = false)
+  private Integer streetNumber;
 
-  @Column(name = "city", nullable = false)
-  private String city;
+  @OneToOne
+  @JoinColumn(name = "city_id", nullable = false)
+  private City city;
 
-  @Column(name = "province", nullable = false)
-  private String province;
+  @OneToOne
+  @JoinColumn(name = "province_id", nullable = false)
+  private Province province;
 
-  @Column(name = "region", nullable = false)
-  private String region;
+  @OneToOne
+  @JoinColumn(name = "region_id", nullable = false)
+  private Region region;
 
-  @Column(name = "country", nullable = false)
-  private String country;
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
+  @OneToOne(optional = false)
+  @JoinColumn(name = "country_id", nullable = false)
+  private Country country;
 
   public String getStreet() {
     return street;
@@ -44,43 +38,43 @@ public class Address {
     this.street = street;
   }
 
-  public String getPostal_code() {
-    return postal_code;
+  public Integer getStreetNumber() {
+    return streetNumber;
   }
 
-  public void setPostal_code(String postal_code) {
-    this.postal_code = postal_code;
+  public void setStreetNumber(Integer streetNumber) {
+    this.streetNumber = streetNumber;
   }
 
-  public String getCity() {
+  public City getCity() {
     return city;
   }
 
-  public void setCity(String city) {
+  public void setCity(City city) {
     this.city = city;
   }
 
-  public String getProvince() {
+  public Province getProvince() {
     return province;
   }
 
-  public void setProvince(String province) {
+  public void setProvince(Province province) {
     this.province = province;
   }
 
-  public String getRegion() {
+  public Region getRegion() {
     return region;
   }
 
-  public void setRegion(String region) {
+  public void setRegion(Region region) {
     this.region = region;
   }
 
-  public String getCountry() {
+  public Country getCountry() {
     return country;
   }
 
-  public void setCountry(String country) {
+  public void setCountry(Country country) {
     this.country = country;
   }
 }

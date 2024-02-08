@@ -1,13 +1,22 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "users")
-@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue("user")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +36,13 @@ public class User {
   @Column(name = "joined_date", nullable = false)
   private Date joinedDate;
 
-  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
-  @JoinColumn(name = "address_id", nullable = false)
-  private Address address;
+  @Embedded private EmailAddress emailAddress;
+
+  @Embedded private Address address;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "public_body_staff_id")
+  private PublicBodyStaff publicBodyStaff;
 
   public Long getId() {
     return id;
@@ -71,6 +84,14 @@ public class User {
     this.joinedDate = joinedDate;
   }
 
+  public EmailAddress getEmailAddress() {
+    return emailAddress;
+  }
+
+  public void setEmailAddress(EmailAddress emailAddress) {
+    this.emailAddress = emailAddress;
+  }
+
   public Address getAddress() {
     return address;
   }
@@ -79,4 +100,11 @@ public class User {
     this.address = address;
   }
 
+  public PublicBodyStaff getPublicBodyStaff() {
+    return publicBodyStaff;
+  }
+
+  public void setPublicBodyStaff(PublicBodyStaff publicBodyStaff) {
+    this.publicBodyStaff = publicBodyStaff;
+  }
 }

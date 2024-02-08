@@ -9,28 +9,27 @@ import org.hibernate.proxy.HibernateProxy;
 import java.util.Objects;
 
 @Embeddable
-public class EmailAddress {
-
-  @Column(name = "email", nullable = false)
-  private String email;
+public class PhoneNumber {
+  @Column(name = "number", nullable = false, length = 20)
+  private String number;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "type", nullable = false)
-  private EmailType type;
+  private PhoneNumberType type;
 
-  public String getEmail() {
-    return email;
+  public String getNumber() {
+    return number;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setNumber(String number) {
+    this.number = number;
   }
 
-  public EmailType getType() {
+  public PhoneNumberType getType() {
     return type;
   }
 
-  public void setType(EmailType type) {
+  public void setType(PhoneNumberType type) {
     this.type = type;
   }
 
@@ -47,15 +46,15 @@ public class EmailAddress {
             ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass()
             : this.getClass();
     if (thisEffectiveClass != oEffectiveClass) return false;
-    EmailAddress that = (EmailAddress) o;
-    return getEmail() != null
-        && Objects.equals(getEmail(), that.getEmail())
+    PhoneNumber that = (PhoneNumber) o;
+    return getNumber() != null
+        && Objects.equals(getNumber(), that.getNumber())
         && getType() != null
         && Objects.equals(getType(), that.getType());
   }
 
   @Override
   public final int hashCode() {
-    return Objects.hash(email, type);
+    return Objects.hash(number, type);
   }
 }
