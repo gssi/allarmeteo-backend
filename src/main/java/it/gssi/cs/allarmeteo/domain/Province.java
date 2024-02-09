@@ -76,6 +76,14 @@ public class Province {
     this.cities = cities;
   }
 
+  public void addCity(City city) {
+    this.cities.add(city);
+  }
+
+  public void removeCity(City city) {
+    this.cities.remove(city);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

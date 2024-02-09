@@ -15,19 +15,19 @@ public class Address {
   private Integer streetNumber;
 
   @OneToOne
-  @JoinColumn(name = "city_id", nullable = false)
+  @JoinColumn(name = "city_id")
   private City city;
 
   @OneToOne
-  @JoinColumn(name = "province_id", nullable = false)
+  @JoinColumn(name = "province_id")
   private Province province;
 
   @OneToOne
-  @JoinColumn(name = "region_id", nullable = false)
+  @JoinColumn(name = "region_id")
   private Region region;
 
-  @OneToOne(optional = false)
-  @JoinColumn(name = "country_id", nullable = false)
+  @OneToOne
+  @JoinColumn(name = "country_id")
   private Country country;
 
   public String getStreet() {

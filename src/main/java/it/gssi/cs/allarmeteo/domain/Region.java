@@ -65,6 +65,14 @@ public class Region {
     this.provinces = provinces;
   }
 
+  public void addProvince(Province province) {
+    this.provinces.add(province);
+  }
+
+  public void removeProvince(Province province) {
+    this.provinces.remove(province);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

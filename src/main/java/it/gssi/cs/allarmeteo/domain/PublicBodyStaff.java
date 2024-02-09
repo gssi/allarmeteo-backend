@@ -8,10 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -24,6 +26,13 @@ public class PublicBodyStaff {
 
   @OneToOne(mappedBy = "publicBodyStaff")
   private User user;
+
+  @ManyToOne
+  @JoinColumn(name = "public_body_id")
+  private PublicBody publicBody;
+
+  @Column(name = "is_public_body_admin", nullable = false)
+  private Boolean isPublicBodyAdmin = false;
 
   @ElementCollection
   @CollectionTable(name = "public_body_staff_emails", joinColumns = @JoinColumn(name = "owner_id"))
@@ -51,6 +60,22 @@ public class PublicBodyStaff {
     this.user = user;
   }
 
+  public PublicBody getPublicBody() {
+    return publicBody;
+  }
+
+  public void setPublicBody(PublicBody publicBody) {
+    this.publicBody = publicBody;
+  }
+
+  public Boolean getPublicBodyAdmin() {
+    return isPublicBodyAdmin;
+  }
+
+  public void setPublicBodyAdmin(Boolean publicBodyAdmin) {
+    isPublicBodyAdmin = publicBodyAdmin;
+  }
+
   public Set<EmailAddress> getEmails() {
     return emails;
   }
@@ -59,11 +84,43 @@ public class PublicBodyStaff {
     this.emails = emails;
   }
 
+  public void addEmail(EmailAddress emailAddress) {
+    this.emails.add(emailAddress);
+  }
+
+  public void removeEmail(EmailAddress emailAddress) {
+    this.emails.remove(emailAddress);
+  }
+
   public Set<PhoneNumber> getPhoneNumbers() {
     return phoneNumbers;
   }
 
   public void setPhoneNumbers(Set<PhoneNumber> phoneNumbers) {
     this.phoneNumbers = phoneNumbers;
+  }
+
+  public void addPhoneNumber(PhoneNumber phoneNumber) {
+    this.phoneNumbers.add(phoneNumber);
+  }
+
+  public void removePhoneNumber(PhoneNumber phoneNumber) {
+    this.phoneNumbers.remove(phoneNumber);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PublicBodyStaff that = (PublicBodyStaff) o;
+    return Objects.equals(id, that.id)
+        && Objects.equals(user, that.user)
+        && Objects.equals(publicBody, that.publicBody)
+        && Objects.equals(isPublicBodyAdmin, that.isPublicBodyAdmin);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, user, publicBody, isPublicBodyAdmin);
   }
 }

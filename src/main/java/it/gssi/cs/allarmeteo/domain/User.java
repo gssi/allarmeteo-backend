@@ -40,7 +40,7 @@ public class User {
 
   @Embedded private Address address;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "public_body_staff_id")
   private PublicBodyStaff publicBodyStaff;
 
