@@ -10,8 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -43,6 +44,9 @@ public class PublicBody {
 
   @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<PublicBodyStaff> staff = new HashSet<>();
+
+  @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<PublicBodyRiskTypeZone> riskTypesZones = new LinkedHashSet<>();
 
   public Long getId() {
     return id;
@@ -122,5 +126,53 @@ public class PublicBody {
 
   public void removeStaffMember(PublicBodyStaff staffMember) {
     this.staff.remove(staffMember);
+  }
+
+  public Set<PublicBodyRiskTypeZone> getRiskTypesZones() {
+    return riskTypesZones;
+  }
+
+  public void setRiskTypesZones(Set<PublicBodyRiskTypeZone> riskTypesZones) {
+    this.riskTypesZones = riskTypesZones;
+  }
+
+  public void addRiskTypeZone(RiskType riskType, Zone zone) {
+    PublicBodyRiskTypeZone publicBodyRiskTypeZone =
+        new PublicBodyRiskTypeZone(this, riskType, zone);
+    this.riskTypesZones.add(publicBodyRiskTypeZone);
+  }
+
+  public void removeRiskTypeZone(RiskType riskType, Zone zone) {
+    for (PublicBodyRiskTypeZone publicBodyRiskTypeZone : this.riskTypesZones) {
+      if (publicBodyRiskTypeZone.getPublicBody().equals(this)
+          && publicBodyRiskTypeZone.getRiskType().equals(riskType)
+          && publicBodyRiskTypeZone.getZone().equals(zone)) {
+        this.riskTypesZones.remove(publicBodyRiskTypeZone);
+        publicBodyRiskTypeZone.setPublicBody(null);
+        publicBodyRiskTypeZone.setRiskType(null);
+        publicBodyRiskTypeZone.setZone(null);
+      }
+    }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PublicBody that = (PublicBody) o;
+    return Objects.equals(id, that.id)
+        && Objects.equals(name, that.name)
+        && Objects.equals(description, that.description)
+        && Objects.equals(website, that.website)
+        && Objects.equals(isCityHall, that.isCityHall)
+        && Objects.equals(address, that.address)
+        && Objects.equals(phoneNumber, that.phoneNumber)
+        && Objects.equals(emailAddress, that.emailAddress);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(
+        id, name, description, website, isCityHall, address, phoneNumber, emailAddress);
   }
 }

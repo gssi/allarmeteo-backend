@@ -11,6 +11,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,8 +33,15 @@ public class Zone {
   @JoinTable(
       name = "zones_provinces",
       joinColumns = @JoinColumn(name = "zone_id"),
-      inverseJoinColumns = @JoinColumn(name = "provinces_id"))
+      inverseJoinColumns = @JoinColumn(name = "province_id"))
   private Set<Province> provinces = new HashSet<>();
+
+  @ManyToMany
+  @JoinTable(
+      name = "zones_risk_types",
+      joinColumns = @JoinColumn(name = "zone_id"),
+      inverseJoinColumns = @JoinColumn(name = "riskType_id"))
+  private Set<RiskType> riskTypes = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -73,5 +81,36 @@ public class Zone {
 
   public void removeProvince(Province province) {
     provinces.remove(province);
+  }
+
+  public Set<RiskType> getRiskTypes() {
+    return riskTypes;
+  }
+
+  public void setRiskTypes(Set<RiskType> riskTypes) {
+    this.riskTypes = riskTypes;
+  }
+
+  public void addRiskType(RiskType riskType) {
+    this.riskTypes.add(riskType);
+  }
+
+  public void removeRiskType(RiskType riskType) {
+    this.riskTypes.remove(riskType);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Zone zone = (Zone) o;
+    return Objects.equals(id, zone.id)
+        && Objects.equals(name, zone.name)
+        && Objects.equals(description, zone.description);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, description);
   }
 }
