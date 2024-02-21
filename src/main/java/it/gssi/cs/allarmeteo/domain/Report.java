@@ -9,8 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "reports")
@@ -39,10 +39,14 @@ public class Report {
   @JoinColumn(name = "risk_type_id", nullable = false)
   private RiskType riskType;
 
-  public Report() {
-  }
+  @ManyToOne
+  @JoinColumn(name = "criticality_evaluation_id")
+  private CriticalityEvaluation criticalityEvaluation;
 
-  public Report(LocalDateTime date, String description, PublicBody publicBody, Zone zone, RiskType riskType) {
+  public Report() {}
+
+  public Report(
+      LocalDateTime date, String description, PublicBody publicBody, Zone zone, RiskType riskType) {
     this.date = date;
     this.description = description;
     this.publicBody = publicBody;
@@ -96,5 +100,31 @@ public class Report {
 
   public void setRiskType(RiskType riskType) {
     this.riskType = riskType;
+  }
+
+  public CriticalityEvaluation getCriticalityEvaluation() {
+    return criticalityEvaluation;
+  }
+
+  public void setCriticalityEvaluation(CriticalityEvaluation criticalityEvaluation) {
+    this.criticalityEvaluation = criticalityEvaluation;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Report report = (Report) o;
+    return Objects.equals(id, report.id)
+        && Objects.equals(date, report.date)
+        && Objects.equals(description, report.description)
+        && Objects.equals(publicBody, report.publicBody)
+        && Objects.equals(zone, report.zone)
+        && Objects.equals(riskType, report.riskType);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, date, description, publicBody, zone, riskType);
   }
 }
