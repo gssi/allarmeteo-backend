@@ -11,7 +11,6 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class PublicBody {
   private String name;
 
   @Lob
-  @Column(name = "description", nullable = false)
+  @Column(name = "public_body_description", nullable = false)
   private String description;
 
   @Column(name = "website", nullable = false)
@@ -46,7 +45,10 @@ public class PublicBody {
   private Set<PublicBodyStaff> staff = new HashSet<>();
 
   @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<PublicBodyRiskTypeZone> riskTypesZones = new LinkedHashSet<>();
+  private Set<PublicBodyRiskTypeZone> riskTypesZones = new HashSet<>();
+
+  @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Report> reports = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -136,21 +138,40 @@ public class PublicBody {
     this.riskTypesZones = riskTypesZones;
   }
 
-  public void addRiskTypeZone(RiskType riskType, Zone zone) {
-    PublicBodyRiskTypeZone publicBodyRiskTypeZone =
-        new PublicBodyRiskTypeZone(this, riskType, zone);
+  public void addRiskTypeZone(PublicBodyRiskTypeZone publicBodyRiskTypeZone) {
     this.riskTypesZones.add(publicBodyRiskTypeZone);
   }
 
-  public void removeRiskTypeZone(RiskType riskType, Zone zone) {
-    for (PublicBodyRiskTypeZone publicBodyRiskTypeZone : this.riskTypesZones) {
-      if (publicBodyRiskTypeZone.getPublicBody().equals(this)
-          && publicBodyRiskTypeZone.getRiskType().equals(riskType)
-          && publicBodyRiskTypeZone.getZone().equals(zone)) {
-        this.riskTypesZones.remove(publicBodyRiskTypeZone);
-        publicBodyRiskTypeZone.setPublicBody(null);
-        publicBodyRiskTypeZone.setRiskType(null);
-        publicBodyRiskTypeZone.setZone(null);
+  public void removeRiskTypeZone(PublicBodyRiskTypeZone publicBodyRiskTypeZone) {
+    for (PublicBodyRiskTypeZone publicBodyRiskTypeZoneItem : this.riskTypesZones) {
+      if (publicBodyRiskTypeZoneItem.getPublicBody().equals(this)
+          && publicBodyRiskTypeZoneItem.getRiskType().equals(publicBodyRiskTypeZone.getRiskType())
+          && publicBodyRiskTypeZoneItem.getZone().equals(publicBodyRiskTypeZone.getZone())) {
+        this.riskTypesZones.remove(publicBodyRiskTypeZoneItem);
+      }
+    }
+  }
+
+  public Set<Report> getReports() {
+    return reports;
+  }
+
+  public void setReports(Set<Report> reports) {
+    this.reports = reports;
+  }
+
+  public void addReport(Report report) {
+    this.reports.add(report);
+    report.getZone().getReports().add(report);
+  }
+
+  public void removeReport(Report report) {
+    for (Report reportItem : this.getReports()) {
+      if (reportItem.getPublicBody().equals(this)
+          && reportItem.getZone().equals(report.getZone())
+          && reportItem.getRiskType().equals(report.getRiskType())) {
+        this.reports.remove(reportItem);
+        reportItem.getZone().getReports().remove(reportItem);
       }
     }
   }

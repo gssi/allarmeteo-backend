@@ -1,5 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,7 +28,7 @@ public class Zone {
   private String name;
 
   @Lob
-  @Column(name = "description", nullable = false)
+  @Column(name = "zone_description", nullable = false)
   private String description;
 
   @ManyToMany
@@ -42,6 +44,9 @@ public class Zone {
       joinColumns = @JoinColumn(name = "zone_id"),
       inverseJoinColumns = @JoinColumn(name = "riskType_id"))
   private Set<RiskType> riskTypes = new HashSet<>();
+
+  @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Report> reports = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -97,6 +102,14 @@ public class Zone {
 
   public void removeRiskType(RiskType riskType) {
     this.riskTypes.remove(riskType);
+  }
+
+  public Set<Report> getReports() {
+    return reports;
+  }
+
+  public void setReports(Set<Report> reports) {
+    this.reports = reports;
   }
 
   @Override
