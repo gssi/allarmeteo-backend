@@ -26,7 +26,7 @@ public class CriticalityLevel {
   private String name;
 
   @Lob
-  @Column(name = "description", nullable = false)
+  @Column(name = "criticality_level_description", nullable = false)
   private String description;
 
   public Long getId() {

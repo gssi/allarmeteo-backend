@@ -26,7 +26,7 @@ public class RiskType {
   private String name;
 
   @Lob
-  @Column(name = "description", nullable = false)
+  @Column(name = "risk_type_description", nullable = false)
   private String description;
 
   @ManyToMany(mappedBy = "riskTypes")
