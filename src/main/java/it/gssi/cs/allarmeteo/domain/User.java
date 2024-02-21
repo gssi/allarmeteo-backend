@@ -41,6 +41,10 @@ public class User {
   @Embedded private Address address;
 
   @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "profile_image_id")
+  private Image profileImage;
+
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
   @JoinColumn(name = "public_body_staff_id")
   private PublicBodyStaff publicBodyStaff;
 
@@ -98,6 +102,14 @@ public class User {
 
   public void setAddress(Address address) {
     this.address = address;
+  }
+
+  public Image getProfileImage() {
+    return profileImage;
+  }
+
+  public void setProfileImage(Image profileImage) {
+    this.profileImage = profileImage;
   }
 
   public PublicBodyStaff getPublicBodyStaff() {
