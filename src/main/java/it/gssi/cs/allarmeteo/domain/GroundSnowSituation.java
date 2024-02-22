@@ -3,13 +3,13 @@ package it.gssi.cs.allarmeteo.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import java.util.Objects;
 
 @Embeddable
 public class GroundSnowSituation {
-  @OneToOne(optional = false)
-  @JoinColumn(name = "zone_id", nullable = false)
+  @ManyToOne
+  @JoinColumn(name = "zone_id")
   private Zone zone;
 
   @Column(name = "snow_presence", nullable = false)

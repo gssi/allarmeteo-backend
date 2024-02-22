@@ -5,14 +5,14 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-
+import jakarta.persistence.ManyToOne;
 import java.util.Objects;
 
 @Embeddable
 public class Precipitation {
-  @OneToOne(optional = false)
-  @JoinColumn(name = "zone_id", nullable = false)
+
+  @ManyToOne
+  @JoinColumn(name = "zone_id")
   private Zone zone;
 
   @Enumerated(EnumType.STRING)
