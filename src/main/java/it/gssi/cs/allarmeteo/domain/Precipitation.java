@@ -10,9 +10,8 @@ import java.util.Objects;
 
 @Embeddable
 public class Precipitation {
-
-  @ManyToOne
-  @JoinColumn(name = "zone_id")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "zone_id", nullable = false)
   private Zone zone;
 
   @Enumerated(EnumType.STRING)

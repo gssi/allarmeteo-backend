@@ -7,15 +7,15 @@ import java.util.Objects;
 
 @Embeddable
 public class CriticalitySituationItem {
-  @ManyToOne
-  @JoinColumn(name = "risk_type_id")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "risk_type_id", nullable = false)
   private RiskType riskType;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   @JoinColumn(name = "zone_id")
   private Zone zone;
 
-  @ManyToOne
+  @ManyToOne(optional = false)
   @JoinColumn(name = "criticality_level_id")
   private CriticalityLevel criticalityLevel;
 

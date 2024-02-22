@@ -8,8 +8,8 @@ import java.util.Objects;
 
 @Embeddable
 public class SignificantTemperatureVariation {
-  @ManyToOne
-  @JoinColumn(name = "zone_id")
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "zone_id", nullable = false)
   private Zone zone;
 
   @Column(name = "significant_increase", nullable = false)
