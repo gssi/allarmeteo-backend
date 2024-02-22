@@ -35,13 +35,13 @@ public class PublicBodyStaff {
   private Boolean isPublicBodyAdmin = false;
 
   @ElementCollection
-  @CollectionTable(name = "public_body_staff_emails", joinColumns = @JoinColumn(name = "owner_id"))
+  @CollectionTable(name = "public_body_staff_emails", joinColumns = @JoinColumn(name = "public_body_staff_id"))
   private Set<EmailAddress> emails = new HashSet<>();
 
   @ElementCollection
   @CollectionTable(
       name = "public_body_staff_phoneNumbers",
-      joinColumns = @JoinColumn(name = "owner_id"))
+      joinColumns = @JoinColumn(name = "public_body_staff_id"))
   private Set<PhoneNumber> phoneNumbers = new HashSet<>();
 
   public Long getId() {
