@@ -1,6 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
-public enum PrecipitationPhase {
+public enum PrecipitationType {
   LIQUID,
   SOLID;
 }
