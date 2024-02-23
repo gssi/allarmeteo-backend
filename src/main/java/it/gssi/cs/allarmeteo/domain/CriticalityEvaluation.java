@@ -53,7 +53,7 @@ public class CriticalityEvaluation {
 
   @ManyToMany
   @JoinTable(
-      name = "criticality_evaluation_users",
+      name = "criticality_evaluation_compilers",
       joinColumns = @JoinColumn(name = "criticality_evaluation_id"),
       inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> compilers = new HashSet<>();

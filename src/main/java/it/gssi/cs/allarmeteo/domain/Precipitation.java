@@ -15,8 +15,8 @@ public class Precipitation {
   private Zone zone;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "precipitation_phase", nullable = false)
-  private PrecipitationPhase precipitationPhase;
+  @Column(name = "precipitation_type", nullable = false)
+  private PrecipitationType precipitationType;
 
   @Column(name = "precipitation_value", nullable = false)
   private Integer value;
@@ -29,12 +29,12 @@ public class Precipitation {
     this.zone = zone;
   }
 
-  public PrecipitationPhase getPrecipitationPhase() {
-    return precipitationPhase;
+  public PrecipitationType getPrecipitationPhase() {
+    return precipitationType;
   }
 
-  public void setPrecipitationPhase(PrecipitationPhase precipitationPhase) {
-    this.precipitationPhase = precipitationPhase;
+  public void setPrecipitationPhase(PrecipitationType precipitationType) {
+    this.precipitationType = precipitationType;
   }
 
   public Integer getValue() {
@@ -51,12 +51,12 @@ public class Precipitation {
     if (o == null || getClass() != o.getClass()) return false;
     Precipitation that = (Precipitation) o;
     return Objects.equals(zone, that.zone)
-        && precipitationPhase == that.precipitationPhase
+        && precipitationType == that.precipitationType
         && Objects.equals(value, that.value);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(zone, precipitationPhase, value);
+    return Objects.hash(zone, precipitationType, value);
   }
 }
