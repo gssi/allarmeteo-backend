@@ -31,6 +31,9 @@ public class Zone {
   @Column(name = "zone_description", nullable = false)
   private String description;
 
+  @Column(name = "weather_surveillance_number")
+  private Integer weatherSurveillanceNumber;
+
   @ManyToMany
   @JoinTable(
       name = "zones_provinces",
@@ -70,6 +73,14 @@ public class Zone {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public Integer getWeatherSurveillanceNumber() {
+    return weatherSurveillanceNumber;
+  }
+
+  public void setWeatherSurveillanceNumber(Integer weatherSurveillanceNumber) {
+    this.weatherSurveillanceNumber = weatherSurveillanceNumber;
   }
 
   public Set<Province> getProvinces() {
