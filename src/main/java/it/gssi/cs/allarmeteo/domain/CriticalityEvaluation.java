@@ -1,13 +1,25 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "criticality_evaluation")
+@Table(name = "criticality_evaluations")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class CriticalityEvaluation {
   @Id
@@ -34,8 +46,7 @@ public class CriticalityEvaluation {
   @CollectionTable(
       name = "criticality_evaluations_significant_temperature_variations",
       joinColumns = @JoinColumn(name = "criticality_evaluation_id"))
-  private Set<SignificantTemperatureVariation> significantTemperatureVariations =
-      new LinkedHashSet<>();
+  private Set<SignificantTemperatureVariation> significantTemperatureVariations = new HashSet<>();
 
   @OneToMany(mappedBy = "criticalityEvaluation")
   private Set<CriticalitySituation> criticalitySituations = new HashSet<>();

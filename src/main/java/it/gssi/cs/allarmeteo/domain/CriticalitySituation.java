@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "criticality_situation")
+@Table(name = "criticality_situations")
 public class CriticalitySituation {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

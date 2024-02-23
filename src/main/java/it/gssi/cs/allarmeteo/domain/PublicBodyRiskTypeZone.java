@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "public_body_risk_type_zone")
+@Table(name = "public_bodies_risk_type_zones")
 public class PublicBodyRiskTypeZone {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
