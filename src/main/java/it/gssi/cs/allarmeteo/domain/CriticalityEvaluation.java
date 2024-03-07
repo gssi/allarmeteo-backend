@@ -15,6 +15,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,6 +66,9 @@ public class CriticalityEvaluation {
   @Lob
   @Column(name = "noncompliance_reason")
   private String noncomplianceReason;
+
+  @Column(name = "issued_date", nullable = false)
+  private LocalDateTime issuedDate;
 
   public Long getId() {
     return id;
@@ -186,5 +191,13 @@ public class CriticalityEvaluation {
 
   public void setNoncomplianceReason(String noncomplianceReason) {
     this.noncomplianceReason = noncomplianceReason;
+  }
+
+  public LocalDateTime getIssuedDate() {
+    return issuedDate;
+  }
+
+  public void setIssuedDate(LocalDateTime issuedDate) {
+    this.issuedDate = issuedDate;
   }
 }
