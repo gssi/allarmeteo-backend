@@ -1,5 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -10,7 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
@@ -43,6 +46,14 @@ public class CriticalitySituation {
   @ManyToOne
   @JoinColumn(name = "criticality_evaluation_id")
   private CriticalityEvaluation criticalityEvaluation;
+
+  @ManyToOne
+  @JoinColumn(name = "bulletin_id")
+  private Bulletin bulletin;
+
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @JoinColumn(name = "map_id")
+  private Image map;
 
   public Long getId() {
     return id;
@@ -99,6 +110,22 @@ public class CriticalitySituation {
 
   public void setCriticalityEvaluation(CriticalityEvaluation criticalityEvaluation) {
     this.criticalityEvaluation = criticalityEvaluation;
+  }
+
+  public Bulletin getBulletin() {
+    return bulletin;
+  }
+
+  public void setBulletin(Bulletin bulletin) {
+    this.bulletin = bulletin;
+  }
+
+  public Image getMap() {
+    return map;
+  }
+
+  public void setMap(Image map) {
+    this.map = map;
   }
 
   @Override
