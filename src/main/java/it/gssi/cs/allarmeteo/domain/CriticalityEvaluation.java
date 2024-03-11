@@ -53,7 +53,7 @@ public class CriticalityEvaluation {
   @Column(name = "noncompliance_reason")
   private String noncomplianceReason;
 
-  @OneToOne(optional = false, orphanRemoval = true)
+  @ManyToOne(optional = false)
   @JoinColumn(name = "issuer_id", nullable = false)
   private User issuer;
 
