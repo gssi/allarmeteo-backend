@@ -49,12 +49,4 @@ public class Country {
   public void setRegions(Set<Region> regions) {
     this.regions = regions;
   }
-
-  public void addRegion(Region region) {
-    this.regions.add(region);
-  }
-
-  public void removeRegion(Region region) {
-    this.regions.remove(region);
-  }
 }

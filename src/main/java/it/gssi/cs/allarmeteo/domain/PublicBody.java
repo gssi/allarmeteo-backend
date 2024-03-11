@@ -122,14 +122,6 @@ public class PublicBody {
     this.staff = staff;
   }
 
-  public void addStaffMember(PublicBodyStaff staffMember) {
-    this.staff.add(staffMember);
-  }
-
-  public void removeStaffMember(PublicBodyStaff staffMember) {
-    this.staff.remove(staffMember);
-  }
-
   public Set<PublicBodyRiskTypeZone> getRiskTypesZones() {
     return riskTypesZones;
   }

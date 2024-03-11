@@ -34,27 +34,11 @@ public class HydrogeologicalCriticalityEvaluation extends CriticalityEvaluation 
     this.groundMoistureSituations = groundMoistureSituations;
   }
 
-  public void addGroundMoistureSituation(GroundMoistureSituation groundMoistureSituation) {
-    this.groundMoistureSituations.add(groundMoistureSituation);
-  }
-
-  public void removeGroundMoistureSituation(GroundMoistureSituation groundMoistureSituation) {
-    this.groundMoistureSituations.remove(groundMoistureSituation);
-  }
-
   public Set<QPFevaluation> getQPFevaluations() {
     return qpfEvaluations;
   }
 
   public void setQPFevaluations(Set<QPFevaluation> qpfEvaluations) {
     this.qpfEvaluations = qpfEvaluations;
-  }
-
-  public void addQPFevaluation(QPFevaluation qpfEvaluation) {
-    this.qpfEvaluations.add(qpfEvaluation);
-  }
-
-  public void removeQPFevaluation(QPFevaluation qpfEvaluation) {
-    this.qpfEvaluations.remove(qpfEvaluation);
   }
 }

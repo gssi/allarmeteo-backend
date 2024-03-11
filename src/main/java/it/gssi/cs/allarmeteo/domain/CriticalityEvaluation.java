@@ -76,14 +76,6 @@ public class CriticalityEvaluation {
     this.reports = reports;
   }
 
-  public void addReport(Report report) {
-    this.reports.add(report);
-  }
-
-  public void removeReport(Report report) {
-    this.reports.remove(report);
-  }
-
   public Set<Precipitation> getPrecipitations() {
     return precipitations;
   }
@@ -92,28 +84,12 @@ public class CriticalityEvaluation {
     this.precipitations = precipitations;
   }
 
-  public void addPrecipitation(Precipitation precipitation) {
-    this.precipitations.add(precipitation);
-  }
-
-  public void removePrecipitation(Precipitation precipitation) {
-    this.precipitations.remove(precipitation);
-  }
-
   public Set<GroundSnowSituation> getGroundSnowSituations() {
     return groundSnowSituations;
   }
 
   public void setGroundSnowSituations(Set<GroundSnowSituation> groundSnowSituations) {
     this.groundSnowSituations = groundSnowSituations;
-  }
-
-  public void addGroundSnowSituation(GroundSnowSituation groundSnowSituation) {
-    this.groundSnowSituations.add(groundSnowSituation);
-  }
-
-  public void removeGroundSnowSituation(GroundSnowSituation groundSnowSituation) {
-    this.groundSnowSituations.remove(groundSnowSituation);
   }
 
   public Set<SignificantTemperatureVariation> getSignificantTemperatureVariations() {
@@ -125,16 +101,6 @@ public class CriticalityEvaluation {
     this.significantTemperatureVariations = significantTemperatureVariations;
   }
 
-  public void addSignificantTemperatureVariation(
-      SignificantTemperatureVariation significantTemperatureVariation) {
-    this.significantTemperatureVariations.add(significantTemperatureVariation);
-  }
-
-  public void removeSignificantTemperatureVariation(
-      SignificantTemperatureVariation significantTemperatureVariation) {
-    this.significantTemperatureVariations.remove(significantTemperatureVariation);
-  }
-
   public Set<CriticalitySituation> getCriticalitySituations() {
     return criticalitySituations;
   }
@@ -143,28 +109,12 @@ public class CriticalityEvaluation {
     this.criticalitySituations = criticalitySituations;
   }
 
-  public void addCriticalitySituation(CriticalitySituation criticalitySituation) {
-    this.criticalitySituations.add(criticalitySituation);
-  }
-
-  public void removeCriticalitySituation(CriticalitySituation criticalitySituation) {
-    this.criticalitySituations.remove(criticalitySituation);
-  }
-
   public Set<User> getCompilers() {
     return compilers;
   }
 
   public void setCompilers(Set<User> compilers) {
     this.compilers = compilers;
-  }
-
-  public void addCompiler(User user) {
-    this.compilers.add(user);
-  }
-
-  public void removeCompiler(User user) {
-    this.compilers.remove(user);
   }
 
   public Boolean getCompliance() {

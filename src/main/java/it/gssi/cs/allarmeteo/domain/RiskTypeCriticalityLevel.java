@@ -106,14 +106,6 @@ public class RiskTypeCriticalityLevel {
     this.communicationChannelTypes = communicationChannelTypes;
   }
 
-  public void addCommunicationChannelType(CommunicationChannelType communicationChannelType) {
-    this.communicationChannelTypes.add(communicationChannelType);
-  }
-
-  public void removeCommunicationChannelType(CommunicationChannelType communicationChannelType) {
-    this.communicationChannelTypes.remove(communicationChannelType);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

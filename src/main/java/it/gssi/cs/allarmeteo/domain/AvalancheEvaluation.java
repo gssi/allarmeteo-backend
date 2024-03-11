@@ -78,14 +78,6 @@ public class AvalancheEvaluation {
     this.evaluationItems = evaluationItems;
   }
 
-  public void addEvaluationItem(AvalancheEvaluationItem evaluationItem) {
-    this.evaluationItems.add(evaluationItem);
-  }
-
-  public void removeEvaluationItem(AvalancheEvaluationItem evaluationItem) {
-    this.evaluationItems.remove(evaluationItem);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

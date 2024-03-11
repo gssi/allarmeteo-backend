@@ -69,20 +69,12 @@ public class QPFevaluation {
     this.evaluationItems = evaluationItems;
   }
 
-  public void addEvaluationItem(QPFevaluationItem evaluationItem) {
-    this.evaluationItems.add(evaluationItem);
-  }
-
-  public void removeEvaluationItem(QPFevaluationItem evaluationItem) {
-    this.evaluationItems.remove(evaluationItem);
-  }
-
   public HydrogeologicalCriticalityEvaluation getHydrogeologicalCriticalityEvaluation() {
     return hydrogeologicalCriticalityEvaluation;
   }
 
   public void setHydrogeologicalCriticalityEvaluation(
-          HydrogeologicalCriticalityEvaluation hydrogeologicalCriticalityEvaluation) {
+      HydrogeologicalCriticalityEvaluation hydrogeologicalCriticalityEvaluation) {
     this.hydrogeologicalCriticalityEvaluation = hydrogeologicalCriticalityEvaluation;
   }
 
