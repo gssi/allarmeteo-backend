@@ -91,28 +91,12 @@ public class Zone {
     this.provinces = provinces;
   }
 
-  public void addProvince(Province province) {
-    provinces.add(province);
-  }
-
-  public void removeProvince(Province province) {
-    provinces.remove(province);
-  }
-
   public Set<RiskType> getRiskTypes() {
     return riskTypes;
   }
 
   public void setRiskTypes(Set<RiskType> riskTypes) {
     this.riskTypes = riskTypes;
-  }
-
-  public void addRiskType(RiskType riskType) {
-    this.riskTypes.add(riskType);
-  }
-
-  public void removeRiskType(RiskType riskType) {
-    this.riskTypes.remove(riskType);
   }
 
   public Set<Report> getReports() {
