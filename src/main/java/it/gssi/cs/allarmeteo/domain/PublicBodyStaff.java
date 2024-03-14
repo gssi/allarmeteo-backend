@@ -2,6 +2,7 @@ package it.gssi.cs.allarmeteo.domain;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,23 +10,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "public_body_staff")
-public class PublicBodyStaff {
+@DiscriminatorValue("public_body_staff")
+public class PublicBodyStaff extends User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
-
-  @OneToOne(mappedBy = "publicBodyStaff")
-  private User user;
 
   @ManyToOne
   @JoinColumn(name = "public_body_id")
@@ -35,7 +30,9 @@ public class PublicBodyStaff {
   private Boolean isPublicBodyAdmin = false;
 
   @ElementCollection
-  @CollectionTable(name = "public_body_staff_emails", joinColumns = @JoinColumn(name = "public_body_staff_id"))
+  @CollectionTable(
+      name = "public_body_staff_emails",
+      joinColumns = @JoinColumn(name = "public_body_staff_id"))
   private Set<EmailAddress> emails = new HashSet<>();
 
   @ElementCollection
@@ -50,14 +47,6 @@ public class PublicBodyStaff {
 
   public void setId(Long id) {
     this.id = id;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
   }
 
   public PublicBody getPublicBody() {
@@ -112,15 +101,17 @@ public class PublicBodyStaff {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
     PublicBodyStaff that = (PublicBodyStaff) o;
     return Objects.equals(id, that.id)
-        && Objects.equals(user, that.user)
         && Objects.equals(publicBody, that.publicBody)
-        && Objects.equals(isPublicBodyAdmin, that.isPublicBodyAdmin);
+        && Objects.equals(isPublicBodyAdmin, that.isPublicBodyAdmin)
+        && Objects.equals(emails, that.emails)
+        && Objects.equals(phoneNumbers, that.phoneNumbers);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, user, publicBody, isPublicBodyAdmin);
+    return Objects.hash(super.hashCode(), id, publicBody, isPublicBodyAdmin, emails, phoneNumbers);
   }
 }
