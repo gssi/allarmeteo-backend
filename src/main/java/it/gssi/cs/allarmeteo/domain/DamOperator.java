@@ -4,5 +4,5 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("dam_operator")
+@DiscriminatorValue("dam_operators")
 public class DamOperator extends User {}
