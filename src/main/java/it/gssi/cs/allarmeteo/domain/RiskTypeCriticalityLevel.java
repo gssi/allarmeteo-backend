@@ -43,12 +43,15 @@ public class RiskTypeCriticalityLevel {
   @Embedded private BehavioralProtocol behavioralProtocol;
 
   @ElementCollection
-  @Column(name = "communication_channel_type")
+  @Column(name = "communication_channel")
   @Enumerated(EnumType.STRING)
   @CollectionTable(
-      name = "risk_types_criticality_levels_communication_channel_types",
+      name = "risk_types_criticality_levels_alert_communication_channels",
       joinColumns = @JoinColumn(name = "risk_type_criticality_level_id"))
-  private Set<CommunicationChannelType> communicationChannelTypes = new HashSet<>();
+  private Set<CommunicationChannelType> alertCommunicationChannels = new HashSet<>();
+
+  @Column(name = "alert_issuing_enabled", nullable = false)
+  private Boolean alertIssuingEnabled = false;
 
   public RiskTypeCriticalityLevel() {}
 
@@ -97,13 +100,21 @@ public class RiskTypeCriticalityLevel {
     this.behavioralProtocol = behavioralProtocol;
   }
 
-  public Set<CommunicationChannelType> getCommunicationChannelTypes() {
-    return communicationChannelTypes;
+  public Set<CommunicationChannelType> getAlertCommunicationChannels() {
+    return alertCommunicationChannels;
   }
 
-  public void setCommunicationChannelTypes(
-      Set<CommunicationChannelType> communicationChannelTypes) {
-    this.communicationChannelTypes = communicationChannelTypes;
+  public void setAlertCommunicationChannels(
+      Set<CommunicationChannelType> alertCommunicationChannels) {
+    this.alertCommunicationChannels = alertCommunicationChannels;
+  }
+
+  public Boolean getAlertIssuingEnabled() {
+    return alertIssuingEnabled;
+  }
+
+  public void setAlertIssuingEnabled(Boolean alertIssuingEnabled) {
+    this.alertIssuingEnabled = alertIssuingEnabled;
   }
 
   @Override
