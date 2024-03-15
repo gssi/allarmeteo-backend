@@ -41,7 +41,7 @@ public class Bulletin {
 
   @Enumerated(EnumType.STRING)
   @Column(name = "state", nullable = false)
-  private BulletinState state;
+  private DocumentState state;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "issuer_id", nullable = false)
@@ -82,11 +82,11 @@ public class Bulletin {
     this.criticalitySituations = criticalitySituations;
   }
 
-  public BulletinState getState() {
+  public DocumentState getState() {
     return state;
   }
 
-  public void setState(BulletinState state) {
+  public void setState(DocumentState state) {
     this.state = state;
   }
 

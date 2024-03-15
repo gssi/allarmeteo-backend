@@ -1,6 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
-public enum BulletinState {
+public enum DocumentState {
     DRAFT,
     PUBLISHED;
 }
