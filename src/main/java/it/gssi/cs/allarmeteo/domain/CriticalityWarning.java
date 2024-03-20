@@ -47,11 +47,11 @@ public class CriticalityWarning {
   private String protocol;
 
   @OneToOne(optional = false, orphanRemoval = true)
-  @JoinColumn(name = "map_id", nullable = false)
+  @JoinColumn(name = "image_id", nullable = false)
   private Image map;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "issuer_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = false)
   private User issuer;
 
   @Column(name = "issued_date", nullable = false)

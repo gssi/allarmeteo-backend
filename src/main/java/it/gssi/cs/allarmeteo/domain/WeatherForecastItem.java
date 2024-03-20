@@ -1,15 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -45,7 +36,7 @@ public class WeatherForecastItem {
   @OneToMany(mappedBy = "weatherForecastItem", orphanRemoval = true)
   private Set<WeatherForecastItemConditionZone> weatherForecastItemConditionZones = new HashSet<>();
 
-  @OneToOne(orphanRemoval = true)
+  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
   @JoinColumn(name = "image_id")
   private Image map;
 

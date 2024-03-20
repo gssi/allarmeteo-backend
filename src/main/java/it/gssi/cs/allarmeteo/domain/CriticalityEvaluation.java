@@ -1,6 +1,21 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -54,7 +69,7 @@ public class CriticalityEvaluation {
   private String noncomplianceReason;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "issuer_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = false)
   private User issuer;
 
   @Column(name = "issued_date", nullable = false)

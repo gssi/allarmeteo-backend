@@ -1,14 +1,6 @@
 package it.gssi.cs.allarmeteo.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "weather_conditions")
@@ -25,7 +17,7 @@ public class WeatherCondition {
   @Column(name = "weather_condition_description", nullable = false)
   private String description;
 
-  @OneToOne(optional = false, orphanRemoval = true)
+  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
   @JoinColumn(name = "icon_id", nullable = false)
   private Image icon;
 

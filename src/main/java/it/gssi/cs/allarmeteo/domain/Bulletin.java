@@ -15,7 +15,6 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,11 +43,14 @@ public class Bulletin {
   private DocumentState state;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "issuer_id", nullable = false)
+  @JoinColumn(name = "user_id", nullable = false)
   private User issuer;
 
   @Column(name = "issued_date", nullable = false)
   private LocalDateTime issuedDate;
+
+  @OneToMany(mappedBy = "bulletin", orphanRemoval = true)
+  private Set<AlertCriticalitySituation> alertCriticalitySituations = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -104,5 +106,14 @@ public class Bulletin {
 
   public void setIssuedDate(LocalDateTime issuedDate) {
     this.issuedDate = issuedDate;
+  }
+
+  public Set<AlertCriticalitySituation> getAlertCriticalitySituations() {
+    return alertCriticalitySituations;
+  }
+
+  public void setAlertCriticalitySituations(
+      Set<AlertCriticalitySituation> alertCriticalitySituations) {
+    this.alertCriticalitySituations = alertCriticalitySituations;
   }
 }

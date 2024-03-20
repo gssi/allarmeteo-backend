@@ -51,8 +51,8 @@ public class CriticalitySituation {
   @JoinColumn(name = "bulletin_id")
   private Bulletin bulletin;
 
-  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-  @JoinColumn(name = "map_id")
+  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+  @JoinColumn(name = "image_id")
   private Image map;
 
   public Long getId() {

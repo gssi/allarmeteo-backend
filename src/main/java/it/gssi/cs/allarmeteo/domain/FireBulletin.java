@@ -8,7 +8,7 @@ import jakarta.persistence.Lob;
 
 @Entity
 @DiscriminatorValue("fire")
-public class FireBulletin extends CriticalityBulletin {
+public class FireBulletin extends Bulletin {
     @Lob
     @Column(name = "synoptic_situation")
     private String synopticSituation;

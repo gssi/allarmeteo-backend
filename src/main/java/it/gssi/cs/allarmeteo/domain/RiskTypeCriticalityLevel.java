@@ -36,7 +36,7 @@ public class RiskTypeCriticalityLevel {
   @JoinColumn(name = "criticality_level_id", nullable = false)
   private CriticalityLevel criticalityLevel;
 
-  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToOne(cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
   @JoinColumn(name = "icon_id")
   private Image icon;
 
