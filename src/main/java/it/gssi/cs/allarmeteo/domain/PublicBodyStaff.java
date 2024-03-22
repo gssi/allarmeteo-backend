@@ -9,7 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -28,6 +31,13 @@ public class PublicBodyStaff extends User {
 
   @Column(name = "is_public_body_admin", nullable = false)
   private Boolean isPublicBodyAdmin = false;
+
+  @ManyToMany
+  @JoinTable(
+      name = "public_body_staff_risks",
+      joinColumns = @JoinColumn(name = "public_body_staff_id"),
+      inverseJoinColumns = @JoinColumn(name = "risks_id"))
+  private Set<Risk> risks = new HashSet<>();
 
   @ElementCollection
   @CollectionTable(
@@ -63,6 +73,14 @@ public class PublicBodyStaff extends User {
 
   public void setPublicBodyAdmin(Boolean publicBodyAdmin) {
     isPublicBodyAdmin = publicBodyAdmin;
+  }
+
+  public Set<Risk> getRisks() {
+    return risks;
+  }
+
+  public void setRisks(Set<Risk> risks) {
+    this.risks = risks;
   }
 
   public Set<EmailAddress> getEmails() {

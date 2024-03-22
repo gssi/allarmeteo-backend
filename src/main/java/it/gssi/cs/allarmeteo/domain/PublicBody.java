@@ -50,6 +50,9 @@ public class PublicBody {
   @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Report> reports = new HashSet<>();
 
+  @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<PublicBodyInEmergency> publicBodiesInEmergency = new HashSet<>();
+
   public Long getId() {
     return id;
   }
@@ -166,6 +169,14 @@ public class PublicBody {
         reportItem.getZone().getReports().remove(reportItem);
       }
     }
+  }
+
+  public Set<PublicBodyInEmergency> getPublicBodiesInEmergency() {
+    return publicBodiesInEmergency;
+  }
+
+  public void setPublicBodiesInEmergency(Set<PublicBodyInEmergency> publicBodiesInEmergency) {
+    this.publicBodiesInEmergency = publicBodiesInEmergency;
   }
 
   @Override

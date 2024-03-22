@@ -34,6 +34,9 @@ public class Zone {
   @Column(name = "weather_surveillance_number")
   private Integer weatherSurveillanceNumber;
 
+  @Column(name = "is_dam", nullable = false)
+  private Boolean isDam = false;
+
   @ManyToMany
   @JoinTable(
       name = "zones_provinces",
@@ -50,6 +53,9 @@ public class Zone {
 
   @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Report> reports = new HashSet<>();
+
+  @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<DamRiskCriticalityLevel> damRiskCriticalityLevels = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -83,6 +89,14 @@ public class Zone {
     this.weatherSurveillanceNumber = weatherSurveillanceNumber;
   }
 
+  public Boolean getIsDam() {
+    return isDam;
+  }
+
+  public void setIsDam(Boolean isDam) {
+    this.isDam = isDam;
+  }
+
   public Set<Province> getProvinces() {
     return provinces;
   }
@@ -107,6 +121,14 @@ public class Zone {
     this.reports = reports;
   }
 
+  public Set<DamRiskCriticalityLevel> getDamRiskCriticalityLevels() {
+    return damRiskCriticalityLevels;
+  }
+
+  public void setDamRiskCriticalityLevels(Set<DamRiskCriticalityLevel> damRiskCriticalityLevels) {
+    this.damRiskCriticalityLevels = damRiskCriticalityLevels;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -114,11 +136,12 @@ public class Zone {
     Zone zone = (Zone) o;
     return Objects.equals(id, zone.id)
         && Objects.equals(name, zone.name)
-        && Objects.equals(description, zone.description);
+        && Objects.equals(description, zone.description)
+        && Objects.equals(isDam, zone.isDam);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description);
+    return Objects.hash(id, name, description, isDam);
   }
 }
