@@ -29,8 +29,8 @@ public class WeatherWarning {
   private String description;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "risk_type_id", nullable = false)
-  private RiskType riskType;
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "zone_id", nullable = false)
@@ -77,12 +77,12 @@ public class WeatherWarning {
     this.description = description;
   }
 
-  public RiskType getRiskType() {
-    return riskType;
+  public Risk getRisk() {
+    return risk;
   }
 
-  public void setRiskType(RiskType riskType) {
-    this.riskType = riskType;
+  public void setRisk(Risk risk) {
+    this.risk = risk;
   }
 
   public Zone getZone() {

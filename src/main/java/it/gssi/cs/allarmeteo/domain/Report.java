@@ -36,8 +36,8 @@ public class Report {
   private Zone zone;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "risk_type_id", nullable = false)
-  private RiskType riskType;
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
   @ManyToOne
   @JoinColumn(name = "criticality_evaluation_id")
@@ -46,12 +46,12 @@ public class Report {
   public Report() {}
 
   public Report(
-      LocalDateTime date, String description, PublicBody publicBody, Zone zone, RiskType riskType) {
+      LocalDateTime date, String description, PublicBody publicBody, Zone zone, Risk risk) {
     this.date = date;
     this.description = description;
     this.publicBody = publicBody;
     this.zone = zone;
-    this.riskType = riskType;
+    this.risk = risk;
   }
 
   public Long getId() {
@@ -94,12 +94,12 @@ public class Report {
     this.zone = zone;
   }
 
-  public RiskType getRiskType() {
-    return riskType;
+  public Risk getRisk() {
+    return risk;
   }
 
-  public void setRiskType(RiskType riskType) {
-    this.riskType = riskType;
+  public void setRisk(Risk risk) {
+    this.risk = risk;
   }
 
   public CriticalityEvaluation getCriticalityEvaluation() {
@@ -120,11 +120,11 @@ public class Report {
         && Objects.equals(description, report.description)
         && Objects.equals(publicBody, report.publicBody)
         && Objects.equals(zone, report.zone)
-        && Objects.equals(riskType, report.riskType);
+        && Objects.equals(risk, report.risk);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, date, description, publicBody, zone, riskType);
+    return Objects.hash(id, date, description, publicBody, zone, risk);
   }
 }

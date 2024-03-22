@@ -8,8 +8,8 @@ import java.util.Objects;
 @Embeddable
 public class CriticalitySituationItem {
   @ManyToOne(optional = false)
-  @JoinColumn(name = "risk_type_id", nullable = false)
-  private RiskType riskType;
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "zone_id")
@@ -19,12 +19,12 @@ public class CriticalitySituationItem {
   @JoinColumn(name = "criticality_level_id")
   private CriticalityLevel criticalityLevel;
 
-  public RiskType getRiskType() {
-    return riskType;
+  public Risk getRisk() {
+    return risk;
   }
 
-  public void setRiskType(RiskType riskType) {
-    this.riskType = riskType;
+  public void setRisk(Risk risk) {
+    this.risk = risk;
   }
 
   public Zone getZone() {
@@ -48,13 +48,13 @@ public class CriticalitySituationItem {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     CriticalitySituationItem that = (CriticalitySituationItem) o;
-    return Objects.equals(riskType, that.riskType)
+    return Objects.equals(risk, that.risk)
         && Objects.equals(zone, that.zone)
         && Objects.equals(criticalityLevel, that.criticalityLevel);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(riskType, zone, criticalityLevel);
+    return Objects.hash(risk, zone, criticalityLevel);
   }
 }

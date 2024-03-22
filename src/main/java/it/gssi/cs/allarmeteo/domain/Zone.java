@@ -43,10 +43,10 @@ public class Zone {
 
   @ManyToMany
   @JoinTable(
-      name = "zones_risk_types",
+      name = "zones_risks",
       joinColumns = @JoinColumn(name = "zone_id"),
-      inverseJoinColumns = @JoinColumn(name = "riskType_id"))
-  private Set<RiskType> riskTypes = new HashSet<>();
+      inverseJoinColumns = @JoinColumn(name = "risk_id"))
+  private Set<Risk> risks = new HashSet<>();
 
   @OneToMany(mappedBy = "zone", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Report> reports = new HashSet<>();
@@ -91,12 +91,12 @@ public class Zone {
     this.provinces = provinces;
   }
 
-  public Set<RiskType> getRiskTypes() {
-    return riskTypes;
+  public Set<Risk> getRisks() {
+    return risks;
   }
 
-  public void setRiskTypes(Set<RiskType> riskTypes) {
-    this.riskTypes = riskTypes;
+  public void setRisks(Set<Risk> risks) {
+    this.risks = risks;
   }
 
   public Set<Report> getReports() {

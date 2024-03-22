@@ -8,27 +8,27 @@ import jakarta.persistence.ManyToOne;
 @Entity
 @DiscriminatorValue("risk_situation")
 public class AlertRiskSituation extends Alert {
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "risk_type_id", nullable = false)
-    private RiskType riskType;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "zone_id", nullable = false)
-    private Zone zone;
+  @ManyToOne(optional = false)
+  @JoinColumn(name = "zone_id", nullable = false)
+  private Zone zone;
 
-    public RiskType getRiskType() {
-        return riskType;
-    }
+  public Risk getRisk() {
+    return risk;
+  }
 
-    public void setRiskType(RiskType riskType) {
-        this.riskType = riskType;
-    }
+  public void setRisk(Risk risk) {
+    this.risk = risk;
+  }
 
-    public Zone getZone() {
-        return zone;
-    }
+  public Zone getZone() {
+    return zone;
+  }
 
-    public void setZone(Zone zone) {
-        this.zone = zone;
-    }
+  public void setZone(Zone zone) {
+    this.zone = zone;
+  }
 }

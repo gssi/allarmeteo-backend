@@ -21,16 +21,16 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "risk_types_criticality_levels")
-public class RiskTypeCriticalityLevel {
+@Table(name = "risks_criticality_levels")
+public class RiskCriticalityLevel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private Long id;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "risk_type_id", nullable = false)
-  private RiskType riskType;
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "criticality_level_id", nullable = false)
@@ -46,17 +46,17 @@ public class RiskTypeCriticalityLevel {
   @Column(name = "communication_channel")
   @Enumerated(EnumType.STRING)
   @CollectionTable(
-      name = "risk_types_criticality_levels_alert_communication_channels",
-      joinColumns = @JoinColumn(name = "risk_type_criticality_level_id"))
+      name = "risks_criticality_levels_alert_communication_channels",
+      joinColumns = @JoinColumn(name = "risk_criticality_level_id"))
   private Set<CommunicationChannelType> alertCommunicationChannels = new HashSet<>();
 
   @Column(name = "alert_issuing_enabled", nullable = false)
   private Boolean alertIssuingEnabled = false;
 
-  public RiskTypeCriticalityLevel() {}
+  public RiskCriticalityLevel() {}
 
-  public RiskTypeCriticalityLevel(RiskType riskType, CriticalityLevel criticalityLevel) {
-    this.riskType = riskType;
+  public RiskCriticalityLevel(Risk risk, CriticalityLevel criticalityLevel) {
+    this.risk = risk;
     this.criticalityLevel = criticalityLevel;
   }
 
@@ -68,12 +68,12 @@ public class RiskTypeCriticalityLevel {
     this.id = id;
   }
 
-  public RiskType getRiskType() {
-    return riskType;
+  public Risk getRisk() {
+    return risk;
   }
 
-  public void setRiskType(RiskType riskType) {
-    this.riskType = riskType;
+  public void setRisk(Risk risk) {
+    this.risk = risk;
   }
 
   public CriticalityLevel getCriticalityLevel() {
@@ -121,14 +121,14 @@ public class RiskTypeCriticalityLevel {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    RiskTypeCriticalityLevel that = (RiskTypeCriticalityLevel) o;
+    RiskCriticalityLevel that = (RiskCriticalityLevel) o;
     return Objects.equals(id, that.id)
-        && Objects.equals(riskType, that.riskType)
+        && Objects.equals(risk, that.risk)
         && Objects.equals(criticalityLevel, that.criticalityLevel);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, riskType, criticalityLevel);
+    return Objects.hash(id, risk, criticalityLevel);
   }
 }

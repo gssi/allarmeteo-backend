@@ -10,8 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "public_bodies_risk_type_zones")
-public class PublicBodyRiskTypeZone {
+@Table(name = "public_bodies_risks_zones")
+public class PublicBodyRiskZone {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
@@ -22,18 +22,18 @@ public class PublicBodyRiskTypeZone {
   private PublicBody publicBody;
 
   @ManyToOne(optional = false)
-  @JoinColumn(name = "risk_type_id", nullable = false)
-  private RiskType riskType;
+  @JoinColumn(name = "risk_id", nullable = false)
+  private Risk risk;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "zone_id", nullable = false)
   private Zone zone;
 
-  public PublicBodyRiskTypeZone() {}
+  public PublicBodyRiskZone() {}
 
-  public PublicBodyRiskTypeZone(PublicBody publicBody, RiskType riskType, Zone zone) {
+  public PublicBodyRiskZone(PublicBody publicBody, Risk risk, Zone zone) {
     this.publicBody = publicBody;
-    this.riskType = riskType;
+    this.risk = risk;
     this.zone = zone;
   }
 
@@ -53,12 +53,12 @@ public class PublicBodyRiskTypeZone {
     this.publicBody = publicBody;
   }
 
-  public RiskType getRiskType() {
-    return riskType;
+  public Risk getRisk() {
+    return risk;
   }
 
-  public void setRiskType(RiskType riskType) {
-    this.riskType = riskType;
+  public void setRisk(Risk risk) {
+    this.risk = risk;
   }
 
   public Zone getZone() {

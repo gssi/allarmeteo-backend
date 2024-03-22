@@ -45,7 +45,7 @@ public class PublicBody {
   private Set<PublicBodyStaff> staff = new HashSet<>();
 
   @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<PublicBodyRiskTypeZone> riskTypesZones = new HashSet<>();
+  private Set<PublicBodyRiskZone> risksZones = new HashSet<>();
 
   @OneToMany(mappedBy = "publicBody", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Report> reports = new HashSet<>();
@@ -122,24 +122,24 @@ public class PublicBody {
     this.staff = staff;
   }
 
-  public Set<PublicBodyRiskTypeZone> getRiskTypesZones() {
-    return riskTypesZones;
+  public Set<PublicBodyRiskZone> getRisksZones() {
+    return risksZones;
   }
 
-  public void setRiskTypesZones(Set<PublicBodyRiskTypeZone> riskTypesZones) {
-    this.riskTypesZones = riskTypesZones;
+  public void setRisksZones(Set<PublicBodyRiskZone> risksZones) {
+    this.risksZones = risksZones;
   }
 
-  public void addRiskTypeZone(PublicBodyRiskTypeZone publicBodyRiskTypeZone) {
-    this.riskTypesZones.add(publicBodyRiskTypeZone);
+  public void addRiskZone(PublicBodyRiskZone publicBodyRiskZone) {
+    this.risksZones.add(publicBodyRiskZone);
   }
 
-  public void removeRiskTypeZone(PublicBodyRiskTypeZone publicBodyRiskTypeZone) {
-    for (PublicBodyRiskTypeZone publicBodyRiskTypeZoneItem : this.riskTypesZones) {
-      if (publicBodyRiskTypeZoneItem.getPublicBody().equals(this)
-          && publicBodyRiskTypeZoneItem.getRiskType().equals(publicBodyRiskTypeZone.getRiskType())
-          && publicBodyRiskTypeZoneItem.getZone().equals(publicBodyRiskTypeZone.getZone())) {
-        this.riskTypesZones.remove(publicBodyRiskTypeZoneItem);
+  public void removeRiskZone(PublicBodyRiskZone publicBodyRiskZone) {
+    for (PublicBodyRiskZone publicBodyRiskZoneItem : this.risksZones) {
+      if (publicBodyRiskZoneItem.getPublicBody().equals(this)
+          && publicBodyRiskZoneItem.getRisk().equals(publicBodyRiskZone.getRisk())
+          && publicBodyRiskZoneItem.getZone().equals(publicBodyRiskZone.getZone())) {
+        this.risksZones.remove(publicBodyRiskZoneItem);
       }
     }
   }
@@ -161,7 +161,7 @@ public class PublicBody {
     for (Report reportItem : this.getReports()) {
       if (reportItem.getPublicBody().equals(this)
           && reportItem.getZone().equals(report.getZone())
-          && reportItem.getRiskType().equals(report.getRiskType())) {
+          && reportItem.getRisk().equals(report.getRisk())) {
         this.reports.remove(reportItem);
         reportItem.getZone().getReports().remove(reportItem);
       }

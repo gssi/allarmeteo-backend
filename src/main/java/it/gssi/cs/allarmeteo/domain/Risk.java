@@ -15,8 +15,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "risk_types")
-public class RiskType {
+@Table(name = "risks")
+public class Risk {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
@@ -26,14 +26,14 @@ public class RiskType {
   private String name;
 
   @Lob
-  @Column(name = "risk_type_description", nullable = false)
+  @Column(name = "risk_description", nullable = false)
   private String description;
 
-  @ManyToMany(mappedBy = "riskTypes")
+  @ManyToMany(mappedBy = "risks")
   private Set<Zone> zones = new HashSet<>();
 
-  @OneToMany(mappedBy = "riskType", cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<RiskTypeCriticalityLevel> criticalityLevels = new HashSet<>();
+  @OneToMany(mappedBy = "risk", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<RiskCriticalityLevel> criticalityLevels = new HashSet<>();
 
   public Long getId() {
     return id;
@@ -75,27 +75,27 @@ public class RiskType {
     this.zones.remove(zone);
   }
 
-  public Set<RiskTypeCriticalityLevel> getCriticalityLevels() {
+  public Set<RiskCriticalityLevel> getCriticalityLevels() {
     return criticalityLevels;
   }
 
-  public void setCriticalityLevels(Set<RiskTypeCriticalityLevel> criticalityLevels) {
+  public void setCriticalityLevels(Set<RiskCriticalityLevel> criticalityLevels) {
     this.criticalityLevels = criticalityLevels;
   }
 
   public void addCriticalityLevel(CriticalityLevel criticalityLevel) {
-    RiskTypeCriticalityLevel riskTypeCriticalityLevel =
-        new RiskTypeCriticalityLevel(this, criticalityLevel);
-    this.criticalityLevels.add(riskTypeCriticalityLevel);
+    RiskCriticalityLevel riskCriticalityLevel =
+        new RiskCriticalityLevel(this, criticalityLevel);
+    this.criticalityLevels.add(riskCriticalityLevel);
   }
 
   public void removeCriticalityLevel(CriticalityLevel criticalityLevel) {
-    for (RiskTypeCriticalityLevel riskTypeCriticalityLevel : this.criticalityLevels) {
-      if (riskTypeCriticalityLevel.getRiskType().equals(this)
-          && riskTypeCriticalityLevel.getCriticalityLevel().equals(criticalityLevel)) {
-        this.criticalityLevels.remove(riskTypeCriticalityLevel);
-        riskTypeCriticalityLevel.setRiskType(null);
-        riskTypeCriticalityLevel.setCriticalityLevel(null);
+    for (RiskCriticalityLevel riskCriticalityLevel : this.criticalityLevels) {
+      if (riskCriticalityLevel.getRisk().equals(this)
+          && riskCriticalityLevel.getCriticalityLevel().equals(criticalityLevel)) {
+        this.criticalityLevels.remove(riskCriticalityLevel);
+        riskCriticalityLevel.setRisk(null);
+        riskCriticalityLevel.setCriticalityLevel(null);
       }
     }
   }
@@ -104,10 +104,10 @@ public class RiskType {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    RiskType riskType = (RiskType) o;
-    return Objects.equals(id, riskType.id)
-        && Objects.equals(name, riskType.name)
-        && Objects.equals(description, riskType.description);
+    Risk risk = (Risk) o;
+    return Objects.equals(id, risk.id)
+        && Objects.equals(name, risk.name)
+        && Objects.equals(description, risk.description);
   }
 
   @Override
